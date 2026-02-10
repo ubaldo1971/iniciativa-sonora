@@ -142,8 +142,8 @@ const Hero = () => {
                                 Iniciativa Sonora en <br />
                                 <span className="text-primary">Movimiento y Transformación</span> A.C.
                             </h1>
-                            <p className="text-base md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto font-sans shadow-black drop-shadow-lg">
-                                Unidos para brindar apoyo, asesoría y esperanza a nuestros hermanos migrantes y sus familias.
+                            <p className="text-base md:text-xl text-gray-100 mb-8 max-w-3xl mx-auto font-sans shadow-black drop-shadow-lg">
+                                Unidos para brindar apoyo integral a <strong>pueblos originarios, personas con discapacidad, comunidad LGBTIQ+ y migrantes</strong>.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <button

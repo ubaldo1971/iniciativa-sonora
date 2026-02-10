@@ -1,13 +1,7 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Projects from './components/Projects';
-import JoinForm from './components/JoinForm';
-import Footer from './components/Footer';
-
-import Donations from './components/Donations';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 function App() {
   const [user, setUser] = React.useState(() => {
@@ -28,16 +22,14 @@ function App() {
   };
 
   return (
-    <div className="font-sans antialiased text-dark dark:text-white bg-white dark:bg-gray-900 transition-colors duration-300">
-      <Header user={user} onLogout={handleLogout} />
-      <Hero />
-      <About />
-      <Services />
-      <Projects />
-      <Donations />
-      {!user && <JoinForm onLogin={handleLogin} />}
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home user={user} onLogin={handleLogin} onLogout={handleLogout} />} />
+        <Route path="/profile/:id" element={<Profile user={user} onLogout={handleLogout} />} />
+        {/* Fallback */}
+        <Route path="*" element={<Home user={user} onLogin={handleLogin} onLogout={handleLogout} />} />
+      </Routes>
+    </Router>
   );
 }
 

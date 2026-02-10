@@ -66,7 +66,7 @@ const Services = () => {
                         Conectando <span className="text-primary">Servicios y Oportunidades</span>
                     </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-                        Gracias a nuestra conexión con empresas socialmente responsables, hemos creado un ecosistema único de dinero y servicios diseñado para apoyar a nuestros paisanos y sus familias.
+                        Gracias a nuestra conexión con empresas socialmente responsables, hemos creado un ecosistema único diseñado para beneficiar a nuestras <strong>comunidades prioritarias, pueblos originarios, personas con discapacidad, comunidad LGBTIQ+ y migrantes</strong>.
                     </p>
                 </div>
 

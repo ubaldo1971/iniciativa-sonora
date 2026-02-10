@@ -45,19 +45,17 @@ const About = () => {
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
 
                     {/* Text Content */}
-                    <div className="order-2 lg:order-1">
-                        <div className="inline-block px-4 py-2 bg-blue-100 text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-6">
-                            Quiénes Somos
-                        </div>
+                    <div>
+                        <span className="text-primary font-bold tracking-wider uppercase mb-2 block">Quiénes Somos</span>
                         <h2 className="text-4xl md:text-5xl font-bold font-heading text-dark dark:text-white mb-8 leading-tight">
                             Más que una organización, <br />
                             <span className="text-primary">somos familia.</span>
                         </h2>
                         <p className="text-gray-600 dark:text-gray-300 font-sans text-lg mb-6 leading-relaxed">
-                            Somos una organización sin fines de lucro nacida de la necesidad de apoyar a la comunidad migrante y sus familias. Entendemos los desafíos porque los hemos vivido.
+                            Somos una organización sin fines de lucro dedicada a apoyar a <strong>comunidades prioritarias, pueblos originarios, personas con discapacidad, la comunidad LGBTIQ+ y migrantes</strong>.
                         </p>
                         <p className="text-gray-600 dark:text-gray-300 font-sans text-lg mb-8 leading-relaxed">
-                            A través de asesoría legal experta, servicios de salud accesibles y apoyo en trámites burocráticos, construimos puentes donde antes había muros, mejorando la calidad de vida de quienes más lo necesitan.
+                            A través de asesoría legal experta, servicios de salud accesibles y apoyo en trámites burocráticos, construimos puentes donde antes había muros, mejorando la calidad de vida de quienes más lo necesitan y de grupos vulnerables.
                         </p>
 
                         <ul className="space-y-4 mb-10">
