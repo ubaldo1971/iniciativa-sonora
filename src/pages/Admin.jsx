@@ -114,8 +114,35 @@ const StatCard = ({ icon, label, value, subtext, color = 'indigo' }) => {
 // ═══════════════════════════════════════════════════════════════════════
 // MAIN ADMIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════
+const ADMIN_PASSWORD = '2017@Electricidad';
+const ADMIN_PIN = '187171';
+
 const Admin = () => {
     const navigate = useNavigate();
+
+    // Auth state
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        return sessionStorage.getItem('admin_auth') === 'true';
+    });
+    const [passwordInput, setPasswordInput] = useState('');
+    const [authError, setAuthError] = useState('');
+
+    const handleLogin = () => {
+        if (passwordInput === ADMIN_PASSWORD) {
+            setIsAuthenticated(true);
+            sessionStorage.setItem('admin_auth', 'true');
+            setAuthError('');
+        } else {
+            setAuthError('Contraseña incorrecta');
+            setPasswordInput('');
+        }
+    };
+
+    const handleLogoutAdmin = () => {
+        setIsAuthenticated(false);
+        sessionStorage.removeItem('admin_auth');
+        navigate('/');
+    };
 
     // Tab state
     const [activeTab, setActiveTab] = useState('registros');
@@ -143,6 +170,8 @@ const Admin = () => {
     const [editForm, setEditForm] = useState({});
     const [deleteItem, setDeleteItem] = useState(null); // { type: 'registro'|'aliado', id, name }
     const [actionLoading, setActionLoading] = useState(false);
+    const [deletePin, setDeletePin] = useState('');
+    const [pinError, setPinError] = useState('');
 
     // Metas states
     const [showMetaModal, setShowMetaModal] = useState(false);
@@ -533,6 +562,59 @@ const Admin = () => {
     // ═══════════════════════════════════════════════════════════════════
     // RENDER
     // ═══════════════════════════════════════════════════════════════════
+
+    // ── LOGIN GATE ──────────────────────────────────────────────────
+    if (!isAuthenticated) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 flex items-center justify-center p-4">
+                <div className="bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 w-full max-w-md border border-gray-700/50 shadow-2xl">
+                    <div className="flex flex-col items-center mb-8">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-2xl text-white mb-4 shadow-lg shadow-indigo-500/30">
+                            IS
+                        </div>
+                        <h1 className="text-2xl font-bold text-white">Panel de Administración</h1>
+                        <p className="text-gray-500 text-sm mt-1">Iniciativa Sonora</p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div>
+                            <label className="text-gray-400 text-xs mb-2 block">🔐 Contraseña de acceso</label>
+                            <input
+                                type="password"
+                                value={passwordInput}
+                                onChange={(e) => { setPasswordInput(e.target.value); setAuthError(''); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+                                placeholder="Ingresa la contraseña"
+                                className="w-full rounded-xl bg-gray-900/80 border border-gray-700 text-white px-4 py-3.5 focus:outline-none focus:border-indigo-500 text-sm placeholder-gray-600"
+                                autoFocus
+                            />
+                            {authError && (
+                                <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
+                                    <span>❌</span> {authError}
+                                </p>
+                            )}
+                        </div>
+
+                        <button
+                            onClick={handleLogin}
+                            disabled={!passwordInput}
+                            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-sm transition-all disabled:opacity-40 shadow-lg shadow-indigo-500/20"
+                        >
+                            Acceder al Panel
+                        </button>
+
+                        <button
+                            onClick={() => navigate('/')}
+                            className="w-full py-2.5 text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                        >
+                            ← Volver al inicio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 text-white">
             {/* ── TOP BAR ─────────────────────────────────────────────── */}
@@ -557,6 +639,10 @@ const Admin = () => {
                         <button onClick={() => exportCSV(registros, 'registros')} className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-sm transition-all">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                             Exportar CSV
+                        </button>
+                        <button onClick={handleLogoutAdmin} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 text-sm transition-all border border-red-500/20" title="Cerrar sesión">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                            <span className="hidden sm:inline">Salir</span>
                         </button>
                     </div>
                 </div>
@@ -1378,7 +1464,7 @@ const Admin = () => {
                 DELETE CONFIRMATION MODAL
             ═══════════════════════════════════════════════════════ */}
             {deleteItem && (
-                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setDeleteItem(null)}>
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => { setDeleteItem(null); setDeletePin(''); setPinError(''); }}>
                     <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-md border border-gray-700 shadow-2xl animate-fadeIn" onClick={(e) => e.stopPropagation()}>
                         <div className="flex flex-col items-center text-center">
                             <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mb-4">
@@ -1387,18 +1473,34 @@ const Admin = () => {
                             <h3 className="text-white font-bold text-xl mb-2">¿Eliminar {deleteItem.type === 'registro' ? 'registro' : 'aliado'}?</h3>
                             <p className="text-gray-400 mb-1">Estás a punto de eliminar permanentemente:</p>
                             <p className="text-white font-bold text-lg mb-4">"{deleteItem.name}"</p>
-                            <p className="text-red-400/80 text-sm mb-6">⚠️ Esta acción no se puede deshacer</p>
+                            <p className="text-red-400/80 text-sm mb-4">⚠️ Esta acción no se puede deshacer</p>
+
+                            {/* Admin PIN input */}
+                            <div className="w-full mb-4">
+                                <label className="text-gray-400 text-xs mb-2 block">🔐 Ingresa el PIN de administrador para confirmar:</label>
+                                <input
+                                    type="password"
+                                    value={deletePin}
+                                    onChange={(e) => { setDeletePin(e.target.value); setPinError(''); }}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') { if (deletePin === ADMIN_PIN) { confirmDelete(); setDeletePin(''); setPinError(''); } else { setPinError('PIN incorrecto'); setDeletePin(''); } } }}
+                                    placeholder="PIN de 6 dígitos"
+                                    maxLength={6}
+                                    className="w-full rounded-xl bg-gray-900 border border-gray-700 text-white px-4 py-3 text-center text-lg tracking-[0.5em] font-mono focus:outline-none focus:border-red-500 placeholder-gray-600 placeholder:tracking-normal placeholder:text-sm"
+                                    autoFocus
+                                />
+                                {pinError && <p className="text-red-400 text-xs mt-2">❌ {pinError}</p>}
+                            </div>
 
                             <div className="flex gap-3 w-full">
                                 <button
-                                    onClick={() => setDeleteItem(null)}
+                                    onClick={() => { setDeleteItem(null); setDeletePin(''); setPinError(''); }}
                                     className="flex-1 px-4 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white text-sm transition-all"
                                 >
                                     Cancelar
                                 </button>
                                 <button
-                                    onClick={confirmDelete}
-                                    disabled={actionLoading}
+                                    onClick={() => { if (deletePin === ADMIN_PIN) { confirmDelete(); setDeletePin(''); setPinError(''); } else { setPinError('PIN incorrecto'); setDeletePin(''); } }}
+                                    disabled={actionLoading || deletePin.length < 6}
                                     className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-bold text-sm transition-all disabled:opacity-50 shadow-lg shadow-red-500/20"
                                 >
                                     {actionLoading ? 'Eliminando...' : 'Sí, Eliminar'}
