@@ -13,7 +13,13 @@ const PartnerModal = ({ isOpen, onClose, onDonateRedirect }) => {
     if (!isOpen) return null;
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === 'telefono') {
+            const digits = value.replace(/[^0-9]/g, '').slice(0, 10);
+            setFormData({ ...formData, [name]: digits });
+            return;
+        }
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e) => {
@@ -88,7 +94,7 @@ const PartnerModal = ({ isOpen, onClose, onDonateRedirect }) => {
                                     type="text"
                                     name="empresa"
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 text-gray-900 placeholder-gray-400"
                                     onChange={handleChange}
                                 />
                             </div>
@@ -99,18 +105,28 @@ const PartnerModal = ({ isOpen, onClose, onDonateRedirect }) => {
                                     <input
                                         type="text"
                                         name="contacto"
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 text-gray-900 placeholder-gray-400"
                                         onChange={handleChange}
                                     />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1 ml-1">Teléfono</label>
                                     <input
-                                        type="tel"
+                                        type="text"
+                                        inputMode="numeric"
                                         name="telefono"
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50"
+                                        maxLength="10"
+                                        value={formData.telefono}
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 text-gray-900 placeholder-gray-400 ${formData.telefono.length > 0 && formData.telefono.length < 10
+                                            ? 'border-red-500 focus:border-red-500'
+                                            : 'border-gray-200 focus:border-primary'
+                                            }`}
                                         onChange={handleChange}
+                                        placeholder="6621234567"
                                     />
+                                    {formData.telefono.length > 0 && formData.telefono.length < 10 && (
+                                        <p className="text-red-500 text-xs mt-1">10 dígitos requeridos ({formData.telefono.length}/10)</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -120,7 +136,7 @@ const PartnerModal = ({ isOpen, onClose, onDonateRedirect }) => {
                                     type="email"
                                     name="email"
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 text-gray-900 placeholder-gray-400"
                                     onChange={handleChange}
                                 />
                             </div>
@@ -130,7 +146,7 @@ const PartnerModal = ({ isOpen, onClose, onDonateRedirect }) => {
                                 <textarea
                                     name="mensaje"
                                     rows="3"
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 resize-none"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all outline-none bg-gray-50 text-gray-900 placeholder-gray-400 resize-none"
                                     placeholder="¿Cómo te gustaría colaborar?"
                                     onChange={handleChange}
                                 ></textarea>

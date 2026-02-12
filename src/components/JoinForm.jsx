@@ -20,6 +20,11 @@ const JoinForm = ({ onLogin }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (name === 'celular') {
+            const digits = value.replace(/[^0-9]/g, '').slice(0, 10);
+            setFormData(prev => ({ ...prev, [name]: digits }));
+            return;
+        }
         setFormData(prev => ({
             ...prev,
             [name]: value
@@ -106,7 +111,7 @@ const JoinForm = ({ onLogin }) => {
                                         required
                                         value={formData.nombre}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                         placeholder="Tu nombre completo"
                                     />
                                 </div>
@@ -121,7 +126,7 @@ const JoinForm = ({ onLogin }) => {
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                             placeholder="ejemplo@correo.com"
                                         />
                                     </div>
@@ -134,22 +139,32 @@ const JoinForm = ({ onLogin }) => {
                                                 name="pais_codigo"
                                                 value={formData.pais_codigo}
                                                 onChange={handleChange}
-                                                className="rounded-l-lg bg-gray-100 dark:bg-gray-600 border border-r-0 border-gray-200 dark:border-gray-500 px-3 py-3 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                                className="rounded-l-lg bg-gray-100 dark:bg-gray-600 border border-r-0 border-gray-200 dark:border-gray-500 px-3 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-100"
                                             >
                                                 {countries.map(c => (
                                                     <option key={c.code} value={c.code}>{c.name}</option>
                                                 ))}
                                             </select>
                                             <input
-                                                type="tel"
+                                                type="text"
+                                                inputMode="numeric"
                                                 name="celular"
                                                 required
+                                                maxLength="10"
                                                 value={formData.celular}
                                                 onChange={handleChange}
-                                                className="flex-1 px-4 py-3 rounded-r-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
-                                                placeholder="123 456 7890"
+                                                className={`flex-1 px-4 py-3 rounded-r-lg bg-gray-50 dark:bg-gray-600 border text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all ${formData.celular.length > 0 && formData.celular.length < 10
+                                                    ? 'border-red-500 focus:border-red-500'
+                                                    : 'border-gray-200 dark:border-gray-500 focus:border-primary'
+                                                    }`}
+                                                placeholder="6621234567"
                                             />
                                         </div>
+                                        {formData.celular.length > 0 && formData.celular.length < 10 && (
+                                            <p className="text-red-500 text-xs mt-1">
+                                                El número debe tener 10 dígitos ({formData.celular.length}/10)
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
 
@@ -165,7 +180,7 @@ const JoinForm = ({ onLogin }) => {
                                             max="120"
                                             value={formData.edad}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                             placeholder="Ej. 35"
                                         />
                                     </div>
@@ -178,7 +193,7 @@ const JoinForm = ({ onLogin }) => {
                                             required
                                             value={formData.sexo}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                         >
                                             <option value="">Seleccionar</option>
                                             <option value="Hambre">Hombre</option>
@@ -196,7 +211,7 @@ const JoinForm = ({ onLogin }) => {
                                         value={formData.comentarios}
                                         onChange={handleChange}
                                         rows="3"
-                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all resize-none"
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-blue-100 outline-none transition-all resize-none"
                                         placeholder="¿Algún detalle sobre tu afiliación o duda?"
                                     ></textarea>
                                 </div>

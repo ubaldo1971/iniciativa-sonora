@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Admin from './pages/Admin';
 
 function App() {
   const [user, setUser] = React.useState(() => {
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home user={user} onLogin={handleLogin} onLogout={handleLogout} />} />
         <Route path="/profile/:id" element={<Profile user={user} onLogout={handleLogout} />} />
+        <Route path="/admin" element={<Admin />} />
         {/* Fallback */}
         <Route path="*" element={<Home user={user} onLogin={handleLogin} onLogout={handleLogout} />} />
       </Routes>

@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         sans: ['"DM Sans"', 'sans-serif'],
         heading: ['"Outfit"', 'sans-serif'],
+        nav: ['"Space Grotesk"', 'sans-serif'],
       },
     },
   },
