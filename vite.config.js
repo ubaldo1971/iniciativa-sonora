@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Use relative paths for deployment
+  base: '/', // Absolute path to ensure assets load correctly on nested routes
 })
