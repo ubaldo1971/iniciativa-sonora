@@ -21,7 +21,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/002_qr.png",
         bio: "Comprometido con el desarrollo social y económico de la región."
     },
     {
@@ -31,7 +31,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/003_qr.png",
         bio: "Trabajando por una gestión transparente y eficiente."
     },
     {
@@ -41,7 +41,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/004_qr.png",
         bio: "Velando por los recursos y su correcta aplicación en proyectos."
     },
     {
@@ -51,7 +51,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/005_qr.png",
         bio: "Aportando ideas y supervisando las actividades de la asociación."
     },
     {
@@ -61,7 +61,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/006_qr.png",
         bio: "Fomentando la participación ciudadana en nuestras iniciativas."
     },
     {
@@ -71,7 +71,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/007_qr.png",
         bio: "Impulsando proyectos de alto impacto para la comunidad."
     },
     {
@@ -81,7 +81,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/008_qr.png",
         bio: "Conectando nuestra misión con la sociedad sonorense."
     },
     {
@@ -91,7 +91,7 @@ export const members = [
         email: "contacto@iniciativasonora.org",
         phone: "+52 662 000 0000",
         image: "/placeholder-profile.png",
-        qr: "/placeholder-qr.png",
+        qr: "/members/009_qr.png",
         bio: "Garantizando el cumplimiento legal y ético de nuestras acciones."
     }
 ];
