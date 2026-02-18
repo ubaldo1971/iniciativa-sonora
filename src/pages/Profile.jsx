@@ -39,8 +39,8 @@ function Profile({ user, onLogout }) {
 
                     <div className="px-8 pb-8">
                         <div className="relative flex flex-col md:flex-row items-center md:items-end -mt-16 mb-6">
-                            {/* Profile Image/Badge Area */}
-                            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-lg overflow-hidden bg-white">
+                            {/* Profile Image/Badge Area - Increased size for better visibility */}
+                            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-white">
                                 <img
                                     src={member.image}
                                     alt={member.name}
@@ -105,7 +105,13 @@ function Profile({ user, onLogout }) {
                                 <div>
                                     <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-2">Sobre mí</h3>
                                     <div className="prose dark:prose-invert text-gray-600 dark:text-gray-300">
-                                        <p>{member.bio || "Miembro activo de Iniciativa Sonora."}</p>
+                                        {member.bio ? (
+                                            member.bio.split('\n').map((line, index) => (
+                                                line.trim() !== '' ? <p key={index} className="mb-4 text-justify leading-relaxed">{line}</p> : null
+                                            ))
+                                        ) : (
+                                            <p>Miembro activo de Iniciativa Sonora.</p>
+                                        )}
                                     </div>
                                 </div>
 

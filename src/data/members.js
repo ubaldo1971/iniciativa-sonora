@@ -7,7 +7,33 @@ export const members = [
         phone: "+52 662 509 6257",
         image: "/members/001_badge.png",
         qr: "/members/001_qr.png",
-        bio: "Liderando la iniciativa para transformar Sonora con visión y compromiso.",
+        bio: `Ubaldo Castillo
+Presidente y Líder Migrante
+
+La historia de Ubaldo Castillo es la historia de miles de mexicanos que un día tuvieron que dejar su tierra en busca de oportunidades.
+
+Durante más de diez años vivió en Los Ángeles, California. Ahí experimentó lo que significa empezar desde cero, trabajar lejos de la familia, adaptarse a otra cultura y enfrentar la incertidumbre migratoria. Vivió la nostalgia, el esfuerzo silencioso y la dignidad de quienes sostienen a México desde el exterior a través de su trabajo y sus remesas.
+
+Pero también vivió algo más profundo: la invisibilidad política.
+
+Comprendió que millones de connacionales contribuyen a la economía y al desarrollo social del país, pero no cuentan con una representación auténtica en los espacios donde se toman decisiones. Esa realidad marcó su vida.
+
+Al regresar a México, decidió transformar su experiencia en causa. No volvió con resentimiento, sino con convicción. Convicción de que la comunidad migrante merece voz, voto y respeto. Convicción de que la diáspora no debe ser utilizada como discurso, sino reconocida como fuerza social y política.
+
+Desde entonces, ha impulsado una agenda que busca garantizar:
+
+Representación migrante real y sin simulaciones
+
+Participación directa de los connacionales en la vida democrática
+
+Defensa integral de los derechos humanos de quienes viven fuera del país
+
+Ubaldo Castillo no habla de la migración como un concepto. Habla desde la experiencia. Desde la separación familiar. Desde el trabajo constante. Desde la esperanza de regresar algún día a una patria que también los reconozca.
+
+Su liderazgo nace del compromiso personal y de una visión clara: que ningún migrante vuelva a sentirse invisible en su propio país.
+
+Porque para él, la migración no es una estadística.
+Es una historia humana que merece justicia y representación.`,
         social: {
             twitter: "#",
             linkedin: "#",
